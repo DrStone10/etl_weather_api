@@ -2,17 +2,18 @@ from prefect import flow
 import pandas as pd
 import yaml
 
-# my etl functions:
+# importing the extract, transform, load functions:
 from etl import *
-
-with open('config/config.yaml', 'r') as file:
-    config = yaml.safe_load(file)
 
 @flow(name='api_etl', log_prints=True)
 def main():
 
+    # reading the config file:
+    with open('config/config.yaml', 'r') as file:
+        config = yaml.safe_load(file)
+
     # loop over all cities:
-    for city in config['Cities']:
+    for city in config['cities']:
 
         # api settings:
         params = {
