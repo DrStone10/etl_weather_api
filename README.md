@@ -1,6 +1,7 @@
 # ETL using Prefect Library
 
-### Basic etl which inculdes:
+### this project includes the following:
+
 * extracting data from api as json files.
-* transforming the data and cleaning it
-* loading it to the database
+* transforming the data and cleaning it.
+* loading it to the database.
