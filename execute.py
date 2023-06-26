@@ -26,7 +26,7 @@ def main():
             'query' : city
         }
         headers = {
-            'Authorization': 'Bearer {token}'.format(token=config['Key']),
+            'Authorization': f'Bearer {config["Key"]}',
             'Content-Type': 'application/json'
         }
 
