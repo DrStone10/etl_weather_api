@@ -1,7 +1,8 @@
+from colorama import Fore, Style
 from prefect import task
 import pandas as pd
 
-@task()
+@task(log_prints=True)
 def transform_data(dataframe):
 
     # getting only useful columns:
@@ -13,4 +14,6 @@ def transform_data(dataframe):
     df['location.localtime'] = pd.to_datetime(df['location.localtime'])
     df.rename(columns={'location.country':'country', 'location.name':'city', 'location.localtime':'localtime', 'current.temperature':'temperature', 'current.wind_degree':'wind_degree', 'current.wind_speed':'wind_speed', 'current.wind_dir':'wind_direction', 'current.pressure':'pressure', 'current.humidity':'humidity', 'current.cloudcover':'cloudcover', 'current.visibility':'visibility', 'current.is_day':'is_day'}, inplace=True)
     
+    print(f"{Fore.CYAN} Transform phase done. {Style.RESET_ALL}")
+
     return df

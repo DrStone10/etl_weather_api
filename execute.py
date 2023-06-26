@@ -1,3 +1,5 @@
+from datetime import datetime
+from colorama import Fore, Style
 from prefect import flow
 import pandas as pd
 import yaml
@@ -7,6 +9,9 @@ from etl import *
 
 @flow(name='api_etl', log_prints=True)
 def main():
+
+    # the current_time is used for naming each table added to the database:
+    current_time = datetime.now().strftime('%Hh%Mm')
 
     # reading the config file:
     with open('config/config.yaml', 'r') as file:
@@ -28,9 +33,9 @@ def main():
         # etl process:
         raw_data = extract_data(config['url'], headers, params)
         data = transform_data(raw_data)
-        load_data(data, config['database'])
+        load_data(data, config['database'], current_time)
 
-        print(f'Data Loaded Seccessfully for {city}')
+        print(f"{Fore.GREEN} {city} row loaded seccessfully. {Style.RESET_ALL}")
 
 if __name__ == '__main__':
     main()
